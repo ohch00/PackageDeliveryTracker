@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Delivery Tracker</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Sender</th>
+            <th>Carrier</th>
+            <th>Tracking Number</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in tracking_list %}
+        <tr>
+            <td>{{i['sender']}}</td>
+            <td>{{i['carrier']}}</td>
+            <td>{{i['tracking_number']}}</td>
+            <td>{{i['status']}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
