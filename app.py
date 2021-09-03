@@ -1,15 +1,17 @@
 from flask import Flask, request, render_template
+from tracking_list import tracking_list
 import os
 
 app = Flask(__name__)
 
-f = open('tracking_list.txt', 'r')
-content = f.read()
-
-
 @app.route('/')
 def root():
-    return render_template("main.html", tracking_list=content)
+    return render_template("main.html", tracking_list=tracking_list)
+
+
+@app.route('/add')
+def add():
+    return 0
 
 
 if __name__ == "__main__":
