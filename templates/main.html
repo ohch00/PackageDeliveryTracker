@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>Delivery Tracker</h1>
+    <div>
     <table>
         <thead>
         <tr>
@@ -22,9 +23,37 @@
             <td>{{i['carrier']}}</td>
             <td>{{i['tracking_number']}}</td>
             <td>{{i['status']}}</td>
+            <td>
+                <a href="/update/"><button type="button">Update</button></a>
+                <a href="/delete/"><button type="button">Delete</button></a>
+            </td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
+    </div>
+    <div>
+        <h2>Add or Filter Tracking Numbers</h2>
+        <form action="/add" method="POST">
+            <div class="row">
+                <div class="col">
+                    <input type="text" name="sender" id="sender" placeholder="Sender">
+                </div>
+                <div class="col">
+                    <input type="text" name="carrier" id="carrier" placeholder="Carrier">
+                </div>
+                <div class="col">
+                    <input type="text" name="tracking_number" id="tracking_number" placeholder="Tracking Number">
+                </div>
+                <div class="col">
+                    <input type="text" name="status" id="status" placeholder="Status">
+                </div>
+            </div>
+            <div>
+                <input type="submit" formaction="add" value="Add">
+                <input type="submit" formaction="filter" value="Filter">
+            </div>
+        </form>
+    </div>
 </body>
 </html>
