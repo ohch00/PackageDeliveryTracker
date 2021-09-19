@@ -51,14 +51,25 @@ def add():
 
 
 # search/filter tracking numbers
+@app.route('/filter', methods=['POST'])
 def filtering():
-    sender = request.form['sender']
-    carrier = request.form['carrier']
-    tracking_number = request.form['tracking_number']
-    status = request.form['status']
+    sender = request.form['sender'] or None
+    carrier = request.form['carrier'] or None
+    tracking_number = request.form['tracking_number'] or None
+    status = request.form['status'] or None
 
     try:
-        return render_template('main.html', tracking_number=None)
+        with open("tracking_list.txt", 'r+') as file:
+            data = json.load(file)
+
+            filtered_tracking = []
+
+            for i in range(len(data)):
+                for j in data[i].values():
+                    if sender == j or carrier == j or tracking_number == j or status == j:
+                        filtered_tracking.append(data[i])
+
+        return render_template('main.html', tracking_list=filtered_tracking)
 
     except:
         return "There was an issue searching for tracking numbers."
