@@ -53,7 +53,12 @@
                     <input type="text" name="tracking_number" id="tracking_number" placeholder="Tracking Number">
                 </div>
                 <div class="col">
-                    <input type="text" name="status" id="status" placeholder="Status">
+                    <select name="status" id="status">
+                        <option value="None" selected hidden>Status</option>
+                        <option value="Pending ">Pending</option>
+                        <option value="In Transit">In Transit</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
                 </div>
             </div>
             <div>
