@@ -27,6 +27,7 @@ def add():
     sender = request.form['sender'] or None
     carrier = request.form['carrier'] or None
     tracking_number = request.form['tracking_number'] or None
+    status = request.form['status']
 
     try:
         with open("tracking_list.txt", 'r+') as file:
@@ -37,7 +38,7 @@ def add():
                 "sender": sender,
                 "carrier": carrier,
                 "tracking_number": tracking_number,
-                "status": "None"
+                "status": status
             }
 
             data.append(new_data)
