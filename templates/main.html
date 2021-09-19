@@ -24,7 +24,7 @@
             <td>{{i['tracking_number']}}</td>
             <td>{{i['status']}}</td>
             <td>
-                <a href="/update/{{i['id']}}"><button type="button">Update</button></a>
+                <a href="/edit/{{i['id']}}"><button type="button">Edit</button></a>
                 <a href="/delete/{{i['id']}}"><button type="button">Delete</button></a>
             </td>
         </tr>
@@ -42,11 +42,11 @@
                 <div class="col">
                     <select name="carrier" id="carrier">
                         <option value="none" selected disabled hidden>Carrier</option>
-                        <option value="amazon">Amazon</option>
-                        <option value="dhl">DHL</option>
-                        <option value="fedex">FedEx</option>
-                        <option value="ups">UPS</option>
-                        <option value="usps">USPS</option>
+                        <option value="Amazon">Amazon</option>
+                        <option value="DHL">DHL</option>
+                        <option value="FedEx">FedEx</option>
+                        <option value="UPS">UPS</option>
+                        <option value="USPS">USPS</option>
                     </select>
                 </div>
                 <div class="col">

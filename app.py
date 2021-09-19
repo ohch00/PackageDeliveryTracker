@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect
+from flask_bootstrap import Bootstrap
 import os
 import json
 
@@ -28,6 +29,21 @@ def add():
     tracking_number = request.form['tracking_number'] or None
 
     try:
+        with open("tracking_list.txt", 'r+') as file:
+            data = json.load(file)
+
+            new_data = {
+                "id": len(data),
+                "sender": sender,
+                "carrier": carrier,
+                "tracking_number": tracking_number,
+                "status": "None"
+            }
+
+            data.append(new_data)
+            file.seek(0)
+            json.dump(data, file, indent=4)
+
         return redirect('/')
 
     except:
@@ -35,17 +51,17 @@ def add():
 
 
 # search/filter tracking numbers
-def filter():
-    sender = request.form['sender'] or None
-    carrier = request.form['carrier'] or None
-    tracking_number = request.form['tracking_number'] or None
-    status = request.form['status'] or None
+def filtering():
+    sender = request.form['sender']
+    carrier = request.form['carrier']
+    tracking_number = request.form['tracking_number']
+    status = request.form['status']
 
     try:
-        return redirect('/')
+        return render_template('main.html', tracking_number=None)
 
     except:
-        return "There was an issue adding the new tracking number. Please make sure the fields are not empty."
+        return "There was an issue searching for tracking numbers."
 
 
 # delete tracking numbers
@@ -54,7 +70,12 @@ def delete():
 
 
 # update tracking numbers
-def update():
+def edit():
+    pass
+
+
+# refresh tracking numbers
+def refresh():
     pass
 
 
