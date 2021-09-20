@@ -100,8 +100,42 @@ def delete(id):
 
 
 # update tracking numbers
-def edit():
-    pass
+@app.route('/edit/<int:id>')
+def edit(id):
+    try:
+        with open("tracking_list.txt", 'r') as file:
+            data = json.load(file)
+            display = None
+
+            for i in range(len(data)):
+                for key, values in data[i].items():
+                    if key == 'id' and values == id:
+                        display = data[i]
+
+        return render_template('edit.html', i=display)
+
+    except:
+        return "There was an issue editing this tracking number."
+
+
+@app.route('/edited/<int:id>')
+def edit_process(id):
+    try:
+        sender = request.form['sender'] or None
+        carrier = request.form['carrier'] or None
+        tracking_number = request.form['tracking_number'] or None
+        status = request.form['status'] or None
+        check_null = [sender, carrier, tracking_number]
+
+        for i in check_null:
+            if i is None:
+                raise Exception
+
+
+
+        return redirect('/')
+    except:
+        return "There was an issue editing the tracking number."
 
 
 # refresh tracking numbers
