@@ -67,7 +67,7 @@ def filtering():
 
             for i in range(len(data)):
                 for j in data[i].values():
-                    if sender == j or carrier == j or tracking_number == j or status == j:
+                    if sender in j or carrier == j or tracking_number in j or status == j:
                         filtered_tracking.append(data[i])
 
         return render_template('main.html', tracking_list=filtered_tracking)
@@ -77,8 +77,26 @@ def filtering():
 
 
 # delete tracking numbers
-def delete():
-    pass
+@app.route('/delete/<int:id>')
+def delete(id):
+    try:
+        with open("tracking_list.txt", 'r+') as file:
+            data = json.load(file)
+
+            for i in range(len(data)):
+                for key, values in data[i].items():
+                    if key == 'id' and values == id:
+                        data.pop()
+
+        with open("tracking_list.txt", 'w') as file:
+            print(data)
+            file.seek(0)
+            json.dump(data, file, indent=4)
+
+        return redirect('/')
+
+    except:
+        return "There was an issue deleting this tracking number."
 
 
 # update tracking numbers
@@ -92,5 +110,5 @@ def refresh():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 8000))
+    port = int(os.environ.get('PORT', 3000))
     app.run(port=port, debug=True)
