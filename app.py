@@ -90,7 +90,6 @@ def delete(id):
                         break
 
         with open("tracking_list.txt", 'w') as file:
-            print(data)
             file.seek(0)
             json.dump(data, file, indent=4)
 
@@ -145,6 +144,7 @@ def edit_process(id):
                         data[i]['status'] = status
                         break
 
+        with open("tracking_list.txt", 'w') as file:
             file.seek(0)
             json.dump(data, file, indent=4)
 
