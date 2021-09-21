@@ -87,6 +87,7 @@ def delete(id):
                 for key, values in data[i].items():
                     if key == 'id' and values == id:
                         data.pop()
+                        break
 
         with open("tracking_list.txt", 'w') as file:
             print(data)
@@ -111,6 +112,7 @@ def edit(id):
                 for key, values in data[i].items():
                     if key == 'id' and values == id:
                         display = data[i]
+                        break
 
         return render_template('edit.html', i=display)
 
@@ -118,7 +120,7 @@ def edit(id):
         return "There was an issue editing this tracking number."
 
 
-@app.route('/edited/<int:id>')
+@app.route('/edited/<int:id>', methods=['POST'])
 def edit_process(id):
     try:
         sender = request.form['sender'] or None
@@ -131,9 +133,23 @@ def edit_process(id):
             if i is None:
                 raise Exception
 
+        with open("tracking_list.txt", 'r+') as file:
+            data = json.load(file)
 
+            for i in range(len(data)):
+                for key, values in data[i].items():
+                    if key == 'id' and values == id:
+                        data[i]['sender'] = sender
+                        data[i]['carrier'] = carrier
+                        data[i]['tracking_number'] = tracking_number
+                        data[i]['status'] = status
+                        break
+
+            file.seek(0)
+            json.dump(data, file, indent=4)
 
         return redirect('/')
+
     except:
         return "There was an issue editing the tracking number."
 

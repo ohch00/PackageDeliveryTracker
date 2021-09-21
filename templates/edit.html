@@ -6,28 +6,38 @@
 </head>
 <body>
     <h1>Edit Tracking Number</h1>
-        <form action="/edited/{{i['id']}}" method="post">
+        <form action="/edited/{{i['id']}}" method="POST">
             <div class="row">
                 <div class="col">
                     <label for="sender">Sender</label>
                     <input type="text" name="sender" id="sender" value="{{i['sender']}}">
                 </div>
                 <div class="col">
-                    <label for="carrier">Carrier</label>
-                    <input type="text" name="carrier" id="carrier" value="{{i['carrier']}}">
+                    <select name="carrier" id="carrier">
+                        <option value={{i['carrier']}} selected hidden>{{i['carrier']}}</option>
+                        <option value="Amazon">Amazon</option>
+                        <option value="DHL">DHL</option>
+                        <option value="FedEx">FedEx</option>
+                        <option value="UPS">UPS</option>
+                        <option value="USPS">USPS</option>
+                    </select>
                 </div>
                 <div class="col">
                     <label for="tracking_number">Tracking Number</label>
                     <input type="text" name="tracking_number" id="tracking_number" value="{{i['tracking_number']}}">
                 </div>
                 <div class="col">
-                    <label for="status">Status</label>
-                    <input type="text" name="status" id="status" value="{{i['status']}}">
+                    <select name="status" id="status">
+                        <option value="None" selected hidden>Status</option>
+                        <option value="Pending ">Pending</option>
+                        <option value="In Transit">In Transit</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
                 </div>
-            </div>
             <div class="col">
                 <label for = ""></label>
                 <input type="submit" value="Submit">
+            </div>
             </div>
         </form>
 </body>
