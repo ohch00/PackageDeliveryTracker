@@ -130,3 +130,6 @@ dmypy.json
 
 # Text Files
 *.txt
+
+# Key File
+keys.py

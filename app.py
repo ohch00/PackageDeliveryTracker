@@ -1,7 +1,10 @@
 from flask import Flask, request, render_template, redirect
 from flask_bootstrap import Bootstrap
+from keys import USPS_key
+import requests
 import os
 import json
+import xmltodict
 
 app = Flask(__name__)
 
@@ -155,7 +158,26 @@ def edit_process(id):
 
 
 # refresh tracking numbers
+@app.route('/refresh')
 def refresh():
+    pass
+
+
+def process_USPS():
+    tracking_number = None
+    make_url = 'http://production.shippingapis.com/ShippingAPI.dll?API=TrackV2&XML=<TrackRequest USERID="'+USPS_key+'"><TrackID ID="'+str(tracking_number)+'"></TrackID></TrackRequest>'
+    response = requests.get(url=make_url)
+
+
+def process_DHL():
+    pass
+
+
+def process_FedEx():
+    pass
+
+
+def process_UPS():
     pass
 
 
