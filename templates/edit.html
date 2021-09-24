@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Tracking Number</title>
-</head>
-<body>
+{% extends "navbar.html" %}
+
+{% block head %}
+<title>Home Page</title>
+{% endblock %}
+
+{% block nav %}
     <h1>Edit Tracking Number</h1>
         <form action="/edited/{{i['id']}}" method="POST">
             <div class="row">
@@ -40,5 +40,4 @@
             </div>
             </div>
         </form>
-</body>
-</html>
+{% endblock %}

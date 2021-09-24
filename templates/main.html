@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home Page</title>
-</head>
-<body>
+{% extends "navbar.html" %}
+
+{% block head %}
+<title>Home Page</title>
+{% endblock %}
+
+{% block nav %}
     <h1>Delivery Tracker</h1>
     <div>
     <table>
@@ -67,5 +67,4 @@
             </div>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}
