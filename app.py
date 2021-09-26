@@ -167,6 +167,7 @@ def process_USPS():
     make_url = 'http://production.shippingapis.com/ShippingAPI.dll?API=TrackV2&XML=<TrackRequest USERID="'+USPS_key+'"><TrackID ID="'+str(tracking_number)+'"></TrackID></TrackRequest>'
     response = requests.get(url=make_url)
     dict_conversion = xmltodict.parse(response)
+    pass
 
 
 def process_DHL():
