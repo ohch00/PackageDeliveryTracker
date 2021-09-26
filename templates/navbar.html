@@ -8,7 +8,7 @@
 <body>
     <ul>
       <li><a href="/">Home</a></li>
-      <li style="float:right"><a class="active"><img class="refresh" src="{{ url_for('static', filename='refresh.png') }}"></a></li>
+      <li style="float:right"><a class="active" href="/refresh"><img class="refresh" src="{{ url_for('static', filename='refresh.png') }}"></a></li>
     </ul>
     {% block nav %}{% endblock %}
 </body>

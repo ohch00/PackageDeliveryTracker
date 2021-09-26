@@ -3,7 +3,6 @@ from keys import USPS_key
 import requests
 import os
 import json
-import xmltodict
 
 app = Flask(__name__)
 
@@ -159,15 +158,35 @@ def edit_process(id):
 # refresh tracking numbers
 @app.route('/refresh')
 def refresh():
-    pass
+    process_USPS(None)
+    with open("tracking_list.txt", 'r+') as file:
+        data = json.load(file)
+
+        for i in range(len(data)):
+            for key, values in data[i].items():
+                # update tracking numbers here
+                if key == 'tracking_number':
+                    status = process_USPS(values)
+                    data[i]['status'] = status
+
+    with open("tracking_list.txt", 'w') as file:
+        file.seek(0)
+        json.dump(data, file, indent=4)
+
+    return redirect('/')
 
 
-def process_USPS():
-    tracking_number = "9405503699300007820037"
+def process_USPS(tracking_number):
     make_url = 'http://production.shippingapis.com/ShippingAPI.dll?API=TrackV2&XML=<TrackRequest USERID="'+USPS_key+'"><TrackID ID="'+str(tracking_number)+'"></TrackID></TrackRequest>'
     response = requests.get(url=make_url)
-    dict_conversion = xmltodict.parse(response)
-    pass
+    if 200 <= response.status_code < 400:
+        split = "<TrackSummary>"
+        status_process = response.text.partition(split)[2]
+        split_end = "</TrackSummary>"
+        status = status_process.rpartition(split_end)[0]
+        return status
+    else:
+        return "error"
 
 
 def process_DHL():
